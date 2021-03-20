@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: smart
+            
+hr:
+  employee:
+    special:
+      percent10: 10
+      percent5: 5
+      percent2: 2
+      percent0: 0   
+      limit10: 10
+      limit5: 5
+      limit2: 2.5
+      

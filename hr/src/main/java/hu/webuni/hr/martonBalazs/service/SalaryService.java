@@ -13,9 +13,7 @@ public class SalaryService {
 		this.employeeService = employeeService;
 	}
 
-	//paraméterül kap egy alkalmazottat és ennak az alkalmazottnak az új havi fizetését beállítja
 	public int getNewSalary(Employee employee) {
 		return (int)(employee.getSalary() / 100.0 * (100 + employeeService.getPayRaisePercent(employee)));
 	}
-
 }
