@@ -32,53 +32,66 @@ public class HrConfigProperties {
 	}
 	
 	public static class Special{
-		private int percentVeryGood;
-		private int percentGood;
-		private int percentAvarage;
-		private int percentNothing;
+		private double percentVeryGood;
+		private double percentGood;
+		private double percentAvarage;
+		private double percentNothing;
 		private int limitVeryGood;
 		private int limitGood;
 		private int limitAvarage;
 		
-		public int getPercentVeryGood() {
+		public double getPercentVeryGood() {
 			return percentVeryGood;
 		}
-		public void setPercentVeryGood(int percentVeryGood) {
+		
+		public void setPercentVeryGood(double percentVeryGood) {
 			this.percentVeryGood = percentVeryGood;
 		}
-		public int getPercentGood() {
+		
+		public double getPercentGood() {
 			return percentGood;
 		}
-		public void setPercentGood(int percentGood) {
+		
+		public void setPercentGood(double percentGood) {
 			this.percentGood = percentGood;
 		}
-		public int getPercentAvarage() {
+		
+		public double getPercentAvarage() {
 			return percentAvarage;
 		}
-		public void setPercentAvarage(int percentAvarage) {
+		
+		public void setPercentAvarage(double percentAvarage) {
 			this.percentAvarage = percentAvarage;
 		}
-		public int getPercentNothing() {
+		
+		public double getPercentNothing() {
 			return percentNothing;
 		}
-		public void setPercentNothing(int percentNothing) {
+		
+		public void setPercentNothing(double percentNothing) {
 			this.percentNothing = percentNothing;
 		}
+		
 		public int getLimitVeryGood() {
 			return limitVeryGood;
 		}
+		
 		public void setLimitVeryGood(int limitVeryGood) {
 			this.limitVeryGood = limitVeryGood;
 		}
+		
 		public int getLimitGood() {
 			return limitGood;
 		}
+		
 		public void setLimitGood(int limitGood) {
 			this.limitGood = limitGood;
 		}
+		
 		public int getLimitAvarage() {
 			return limitAvarage;
 		}
+		
 		public void setLimitAvarage(int limitAvarage) {
 			this.limitAvarage = limitAvarage;
 		}

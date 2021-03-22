@@ -47,9 +47,9 @@ public class SmartEmployeeService implements EmployeeService{
 //		    else if (months >= limit2 && months < limit5) return percent2;
 //		    else return percent0;
 		
-		if (months >= config.getEmployee().getSpecial().getLimitVeryGood()) return config.getEmployee().getSpecial().getPercentVeryGood();
-		else if (months >= config.getEmployee().getSpecial().getLimitGood() && months < config.getEmployee().getSpecial().getLimitVeryGood()) return config.getEmployee().getSpecial().getPercentGood();
-		else if (months >= config.getEmployee().getSpecial().getLimitAvarage() && months < config.getEmployee().getSpecial().getLimitGood()) return (config.getEmployee().getSpecial().getPercentAvarage());
-		else return config.getEmployee().getSpecial().getPercentNothing();
+		if (months >= config.getEmployee().getSpecial().getLimitVeryGood()) return (int) config.getEmployee().getSpecial().getPercentVeryGood();
+		else if (months >= config.getEmployee().getSpecial().getLimitGood() && months < config.getEmployee().getSpecial().getLimitVeryGood()) return (int) config.getEmployee().getSpecial().getPercentGood();
+		else if (months >= config.getEmployee().getSpecial().getLimitAvarage() && months < config.getEmployee().getSpecial().getLimitGood()) return (int) (config.getEmployee().getSpecial().getPercentAvarage());
+		else return (int) config.getEmployee().getSpecial().getPercentNothing();
 	}
 }
