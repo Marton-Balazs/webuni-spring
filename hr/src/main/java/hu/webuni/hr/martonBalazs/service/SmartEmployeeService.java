@@ -40,16 +40,16 @@ public class SmartEmployeeService implements EmployeeService{
 	public int getPayRaisePercent(Employee employee) {
 		LocalDateTime start = employee.getStartDate();
 		LocalDateTime stop = LocalDateTime.now();
-		long years = java.time.temporal.ChronoUnit.YEARS.between(start , stop);
+		long months = java.time.temporal.ChronoUnit.MONTHS.between(start , stop);
 			
-//		    if (years >= limit10) return percent10;
-//		    else if (years >= limit5 && years < limit10) return percent5;
-//		    else if (years >= limit2 && years < limit5) return percent2;
+//		    if (months >= limit10) return percent10;
+//		    else if (months >= limit5 && months < limit10) return percent5;
+//		    else if (months >= limit2 && months < limit5) return percent2;
 //		    else return percent0;
 		
-		if (years >= config.getEmployee().getSpecial().getLimit10()) return config.getEmployee().getSpecial().getPercent10();
-		else if (years >= config.getEmployee().getSpecial().getLimit5() && years < config.getEmployee().getSpecial().getLimit10()) return config.getEmployee().getSpecial().getPercent5();
-		else if (years >= config.getEmployee().getSpecial().getLimit2() && years < config.getEmployee().getSpecial().getLimit5()) return config.getEmployee().getSpecial().getPercent2();
-		else return config.getEmployee().getSpecial().getPercent0();
+		if (months >= config.getEmployee().getSpecial().getLimitVeryGood()) return config.getEmployee().getSpecial().getPercentVeryGood();
+		else if (months >= config.getEmployee().getSpecial().getLimitGood() && months < config.getEmployee().getSpecial().getLimitVeryGood()) return config.getEmployee().getSpecial().getPercentGood();
+		else if (months >= config.getEmployee().getSpecial().getLimitAvarage() && months < config.getEmployee().getSpecial().getLimitGood()) return (config.getEmployee().getSpecial().getPercentAvarage());
+		else return config.getEmployee().getSpecial().getPercentNothing();
 	}
 }
