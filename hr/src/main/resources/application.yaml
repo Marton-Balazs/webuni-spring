@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: smart
+    
+hr:
+  employee:
+    special:
+      percentVeryGood: 10
+      percentGood: 5
+      percentAvarage: 2
+      percentNothing: 0
+      limitVeryGood: 120
+      limitGood: 60
+      limitAvarage: 30

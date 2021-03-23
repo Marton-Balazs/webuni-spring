@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import hu.webuni.hr.martonBalazs.model.Employee;
 import hu.webuni.hr.martonBalazs.service.SalaryService;
 

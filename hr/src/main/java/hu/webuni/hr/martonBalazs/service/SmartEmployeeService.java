@@ -12,26 +12,26 @@ import hu.webuni.hr.martonBalazs.model.Employee;
 @Service
 public class SmartEmployeeService implements EmployeeService{
 	
-//	@Value("${hr.employee.special.limit10}")
-//	private int limit10;
+//	@Value("${hr.employee.special.limitVeryGood}")
+//	private int limitVeryGood;
 //	
-//	@Value("${hr.employee.special.limit5}")
-//	private int limit5;
+//	@Value("${hr.employee.special.limitGood}")
+//	private int limitGood;
 //	
-//	@Value("${hr.employee.special.limit2}")
-//	private double limit2;
+//	@Value("${hr.employee.special.limitAvarage}")
+//	private double limitAvarage;
 //	
-//	@Value("${hr.employee.special.percent10}")
-//	private int percent10;
+//	@Value("${hr.employee.special.PercentVeryGood}")
+//	private int percentVeryGood;
 //	
-//	@Value("${hr.employee.special.percent5}")
-//	private int percent5;
+//	@Value("${hr.employee.special.percentGood}")
+//	private int percentGood;
 //	
-//	@Value("${hr.employee.special.percent2}")
-//	private int percent2;
+//	@Value("${hr.employee.special.percentAvarage}")
+//	private int percentAvarage;
 //	
-//	@Value("${hr.employee.special.percent0}")
-//	private int percent0;
+//	@Value("${hr.employee.special.percentNothing}")
+//	private int percentNothing;
 	
 	@Autowired
 	HrConfigProperties config;
@@ -42,10 +42,10 @@ public class SmartEmployeeService implements EmployeeService{
 		LocalDateTime stop = LocalDateTime.now();
 		long months = java.time.temporal.ChronoUnit.MONTHS.between(start , stop);
 			
-//		    if (months >= limit10) return percent10;
-//		    else if (months >= limit5 && months < limit10) return percent5;
-//		    else if (months >= limit2 && months < limit5) return percent2;
-//		    else return percent0;
+//		    if (months >= limitVeryGood) return percentVeryGood;
+//		    else if (months >= limitGood && months < limitVeryGood) return percentGood;
+//		    else if (months >= limitAvarage && months < limitGood) return percentAvarage;
+//		    else return percentNothing;
 		
 		if (months >= config.getEmployee().getSpecial().getLimitVeryGood()) return (int) config.getEmployee().getSpecial().getPercentVeryGood();
 		else if (months >= config.getEmployee().getSpecial().getLimitGood() && months < config.getEmployee().getSpecial().getLimitVeryGood()) return (int) config.getEmployee().getSpecial().getPercentGood();
