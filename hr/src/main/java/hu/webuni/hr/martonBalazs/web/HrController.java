@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
@@ -64,5 +66,13 @@ public class HrController {
 	public void deleteEmployee(@PathVariable long id) {
 		employees.remove(id);
 	}
-
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<EmployeeDto> getHighSalary(@RequestParam(value = "salary", required = false, defaultValue = "100") int salary, long id) {
+		EmployeeDto employeeDto = employees.get(id);
+		if (salary != 0 && salary > 100) {
+			return ResponseEntity.ok(employeeDto);
+		}
+		return ResponseEntity.notFound().build();
+	}
 }

@@ -18,9 +18,8 @@
 		</li>
 	</ul>
 	
-	
 	<form th:action="@{/employees}" method="post" th:object="${newEmployee}" >
-		Id: <input th:field="*{id}" /> <br/>
+		Id: <input th:field="*{id}" /> <br/> 
 		Name: <input th:field="*{name}" /> <br/>
 		Position: <input th:field="*{position}" /> <br/>
 		Salary: <input th:field="*{salary}" /> <br/>

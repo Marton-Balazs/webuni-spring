@@ -33,8 +33,8 @@ public class EmployeeTLController {
 	@GetMapping("/employees")
 	public String listEmployees(Map<String, Object> model) {
 		model.put("employees", allEmployees);
-		model.put("newEmployee", new Employee());
-		//model.put("newEmployee", new EmployeeDto());
+		//model.put("newEmployee", new Employee());
+		model.put("newEmployee", new EmployeeDto());
 		return "employees";
 	}
 	
