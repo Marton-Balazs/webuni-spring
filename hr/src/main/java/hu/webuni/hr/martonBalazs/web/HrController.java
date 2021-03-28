@@ -67,12 +67,10 @@ public class HrController {
 		employees.remove(id);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<EmployeeDto> getHighSalary(@RequestParam(value = "salary", required = false, defaultValue = "100") int salary, long id) {
-		EmployeeDto employeeDto = employees.get(id);
-		if (salary != 0 && salary > 100) {
-			return ResponseEntity.ok(employeeDto);
-		}
-		return ResponseEntity.notFound().build();
-	}
+//	@GetMapping("/hello")
+//	public String helloWord(@RequestParam ("user") String user, Map<String, Object> model) {
+//		model.put("welcome", "Hello " + user);
+//		return "index2";
+//	}
+
 }

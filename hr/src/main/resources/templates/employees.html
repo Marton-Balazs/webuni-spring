@@ -19,12 +19,34 @@
 	</ul>
 	
 	<form th:action="@{/employees}" method="post" th:object="${newEmployee}" >
-		Id: <input th:field="*{id}" /> <br/> 
-		Name: <input th:field="*{name}" /> <br/>
-		Position: <input th:field="*{position}" /> <br/>
-		Salary: <input th:field="*{salary}" /> <br/>
-		StartDate: <input th:field="*{startDate}" /> <br/>
-		<input type="submit" value="Add" />
+		<table>
+			<tr>
+				<th>Id: </th>
+				<th><input th:field="*{id}" /> </th>
+			</tr>
+			<tr>
+				<th>Name: </th>
+				<th> <input th:field="*{name}" /> </th>
+			</tr>
+			<tr>
+				<th>Position: </th>
+				<th><input th:field="*{position}" /> </th>
+			</tr>
+			<tr>
+				<th>Salary: </th>
+				<th><input th:field="*{salary}" /> <br/>
+			</tr>
+			<tr>
+				<th>StartDate: </th>
+				<th><input th:field="*{startDate}" /> </th>
+			</tr>
+		</table>
+		
+		<table style="width:18%">
+			<tr>
+				<th><input type="submit" value="Add" /> </th>
+			</tr>
+		</table>
 	</form>
 
 </body>
