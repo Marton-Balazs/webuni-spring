@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,13 +37,13 @@ public class HrController {
 	@GetMapping(params="minSalary")
 	public List<EmployeeDto> getMinSalary(@RequestParam int minSalary) {
 		ArrayList<EmployeeDto> specialEmployee = new ArrayList<>();
-		for(EmployeeDto e : employees.values()) {
-		  if(e.getSalary() > minSalary) {
-			  specialEmployee.add(e); 
-		  }
-		  return specialEmployee;
+		for(Entry<Long, EmployeeDto> entry : employees.entrySet()) {
+		    EmployeeDto edto = entry.getValue();
+		    if (edto.getSalary() > minSalary && minSalary > 0) {
+		    	specialEmployee.add(edto);
+			}
 		}
-		return null;
+		return specialEmployee;
 	}
 	
 	
