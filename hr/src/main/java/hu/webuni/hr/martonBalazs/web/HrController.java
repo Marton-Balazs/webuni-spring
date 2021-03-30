@@ -3,6 +3,7 @@ package hu.webuni.hr.martonBalazs.web;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
@@ -29,6 +29,20 @@ public class HrController {
 	{
 		employees.put(1L, new EmployeeDto(1L, "Balazs", "developer", 5000, LocalDateTime.parse("2000-03-11T10:00:00")));
 		employees.put(2L, new EmployeeDto(2L, "Alajos", "intern", 120, LocalDateTime.parse("2020-01-04T09:00:00")));
+		employees.put(3L, new EmployeeDto(3L, "Gyula", "recepcionist", 500, LocalDateTime.parse("2015-11-20T09:00:00")));
+		employees.put(4L, new EmployeeDto(4L, "Kata", "pepsi cola giver", 4500, LocalDateTime.parse("2005-10-10T09:00:00")));
+	}
+	
+	@GetMapping(params="minSalary")
+	public List<EmployeeDto> getMinSalary(@RequestParam int minSalary) {
+		ArrayList<EmployeeDto> specialEmployee = new ArrayList<>();
+		for(EmployeeDto e : employees.values()) {
+		  if(e.getSalary() > minSalary) {
+			  specialEmployee.add(e); 
+		  }
+		  return specialEmployee;
+		}
+		return null;
 	}
 	
 	
@@ -66,11 +80,5 @@ public class HrController {
 	public void deleteEmployee(@PathVariable long id) {
 		employees.remove(id);
 	}
-	
-//	@GetMapping("/hello")
-//	public String helloWord(@RequestParam ("user") String user, Map<String, Object> model) {
-//		model.put("welcome", "Hello " + user);
-//		return "index2";
-//	}
 
 }
