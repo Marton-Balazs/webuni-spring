@@ -8,15 +8,16 @@
 
 	<h1>List of employees</h1>
 	
-	<ul>
-		<li th:each="employee : ${employees}">
-			<span th:text="${employee.id}">id</span>
-			<span th:text="${employee.name}">name</span>
-			<span th:text="${employee.position}">position</span>
-			<span th:text="${employee.salary}">salary</span>
-			<span th:text="${employee.startDate}">startDate</span>
-		</li>
-	</ul>
+	<table>
+		<tr th:each="employee : ${employees}">
+			<td th:text="${employee.id}"></td>
+			<td><a th:href="@{/employees/{id}(id = ${employee.id})}" th:text="${employee.name}"></a></td>
+			<td th:text="${employee.position}"></td>
+			<td th:text="${employee.salary}"></td>
+			<td th:text="${employee.startDate}"></td>
+			<td><a th:href="@{/employees/{id}/delete(id = ${employee.id})}">Delete</a></td>
+		</tr>
+	</table>
 	
 	<form th:action="@{/employees}" method="post" th:object="${newEmployee}" >
 		<table>

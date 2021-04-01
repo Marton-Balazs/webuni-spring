@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>HR application</title>
+</head>
+<body>
+
+	<h1>Welcome to the employee details</h1>
+	
+	
+	<form th:action="@{/employees/{id}(id = ${Employee.id})}" method="post" th:object="${Employee}" >
+		<table>
+<!-- 			<tr> -->
+<!-- 				<th>Id: </th> -->
+<!-- 				<th><input th:field="*{id}" /> </th> -->
+<!-- 			</tr> -->
+			<tr>
+				<th>Name: </th>
+				<th> <input th:field="*{name}" /> </th>
+			</tr>
+			<tr>
+				<th>Position: </th>
+				<th><input th:field="*{position}" /> </th>
+			</tr>
+			<tr>
+				<th>Salary: </th>
+				<th><input th:field="*{salary}" /> <br/>
+			</tr>
+			<tr>
+				<th>Start date: </th>
+				<th><input th:field="*{startDate}" /> </th>
+			</tr>
+		</table>
+		
+		<table style="width:18%">
+			<tr>
+				<th><input type="submit" value="Modify" /> </th>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>
