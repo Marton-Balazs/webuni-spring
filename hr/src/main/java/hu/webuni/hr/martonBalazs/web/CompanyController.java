@@ -21,7 +21,7 @@ import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
 
 @RestController
 @RequestMapping("/api/companies")
-public class CompaniesController {
+public class CompanyController {
 	
 	private Map<Long, CompanyDto> companies = new HashMap<>();
 	
