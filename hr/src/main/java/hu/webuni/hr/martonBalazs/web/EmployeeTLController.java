@@ -23,7 +23,6 @@ public class EmployeeTLController {
 	private List<EmployeeDto> allEmployees = new ArrayList<>();
 	
 	{
-		//What if add helyett put-ot használnék és a lista azonosítója lenne az id egyben. Akkor nem kéne végig iterálnom a listán, hanem simán hivatkozhatnék az id-ra
 		allEmployees.add(new EmployeeDto(1L, "Gyula", "Maintanance", 20, LocalDateTime.parse("2000-03-11T10:00:00")));
 		allEmployees.add(new EmployeeDto(2L, "Erzsébet", "Scrum master", 800, LocalDateTime.parse("2020-03-11T10:00:00")));
 	}
