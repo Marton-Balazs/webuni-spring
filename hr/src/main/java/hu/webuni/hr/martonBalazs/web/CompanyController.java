@@ -25,24 +25,21 @@ public class CompanyController {
 	
 	private Map<Long, CompanyDto> companies = new HashMap<>();
 	
-	
 	{
 		ArrayList<EmployeeDto> employees1 = new ArrayList<>();
 		ArrayList<EmployeeDto> employees2 = new ArrayList<>();
 		
-		companies.put(1L, new CompanyDto(1L, 100000, "T-Systems", "cím", employees1));
+		companies.put(1L, new CompanyDto(1L, 100000, "T-Systems", "1118 Bp Neumann János u 1/b", employees1));
 		
 		employees1.add(new EmployeeDto(1L, "Károly", "musician", 50, LocalDateTime.parse("2015-03-11T10:00:00")));
-		employees1.add(new EmployeeDto(2L, "Vazul", "nobody", 100, LocalDateTime.parse("1999-03-11T10:00:00")));
+		employees1.add(new EmployeeDto(2L, "Vazul", "kukás", 100, LocalDateTime.parse("1999-03-11T10:00:00")));
 	
-		companies.put(2L, new CompanyDto(2L, 100001, "Unisys", "cím", employees2));
+		companies.put(2L, new CompanyDto(2L, 100001, "Unisys", "2154 Bp Váci út 1-3", employees2));
 		
-		employees2.add(new EmployeeDto(3L, "Béla", "musician", 50, LocalDateTime.parse("2003-04-11T10:00:00")));
+		employees2.add(new EmployeeDto(3L, "Béla", "Büfés", 50, LocalDateTime.parse("2003-04-11T10:00:00")));
 		employees2.add(new EmployeeDto(4L, "János", "nobody", 100, LocalDateTime.parse("1986-03-11T10:00:00")));
 		
-		
 	}
-	
 	
 	@GetMapping
 	public List<CompanyDto> getAll() {
@@ -78,6 +75,5 @@ public class CompanyController {
 	public void deleteCompany(@PathVariable long id) {
 		companies.remove(id);
 	}
-	
 
 }
