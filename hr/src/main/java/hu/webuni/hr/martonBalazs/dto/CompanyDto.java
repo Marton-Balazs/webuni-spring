@@ -17,7 +17,7 @@ public class CompanyDto {
 	private String name;
 	@JsonView(View.OnlyCompany.class)
 	private String adress;
-	@JsonView(View.OnlyCompany.class)
+	
 	ArrayList<EmployeeDto> employees = new ArrayList<>();
 	
 	public CompanyDto() {

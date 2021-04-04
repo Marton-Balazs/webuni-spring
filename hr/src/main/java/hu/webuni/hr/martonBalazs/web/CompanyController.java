@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,11 +29,10 @@ import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
 public class CompanyController {
 	
 	private Map<Long, CompanyDto> companies = new HashMap<>();
+	ArrayList<EmployeeDto> employees1 = new ArrayList<>();
+	ArrayList<EmployeeDto> employees2 = new ArrayList<>();
 	
 	{
-		ArrayList<EmployeeDto> employees1 = new ArrayList<>();
-		ArrayList<EmployeeDto> employees2 = new ArrayList<>();
-		
 		companies.put(1L, new CompanyDto(1L, 100000, "T-Systems", "1118 Bp Neumann János u 1/b", employees1));
 		
 		employees1.add(new EmployeeDto(1L, "Károly", "musician", 50, LocalDateTime.parse("2015-03-11T10:00:00")));
@@ -40,8 +40,8 @@ public class CompanyController {
 	
 		companies.put(2L, new CompanyDto(2L, 100001, "Unisys", "2154 Bp Váci út 1-3", employees2));
 		
-		employees2.add(new EmployeeDto(3L, "Béla", "Büfés", 50, LocalDateTime.parse("2003-04-11T10:00:00")));
-		employees2.add(new EmployeeDto(4L, "János", "nobody", 100, LocalDateTime.parse("1986-03-11T10:00:00")));
+		employees2.add(new EmployeeDto(1L, "Béla", "Büfés", 50, LocalDateTime.parse("2003-04-11T10:00:00")));
+		employees2.add(new EmployeeDto(2L, "János", "nobody", 100, LocalDateTime.parse("1986-03-11T10:00:00")));
 		
 	}
 	
@@ -53,8 +53,7 @@ public class CompanyController {
 	@GetMapping(params="full=false")
 	@JsonView(View.OnlyCompany.class)
 	public List<CompanyDto> getOnlyCompany(@RequestParam Boolean full) {
-		if (full == false || full != null) {
-			
+		if (full == false || full == null) {	
 		}
 		return new ArrayList<> (companies.values());
 	}
