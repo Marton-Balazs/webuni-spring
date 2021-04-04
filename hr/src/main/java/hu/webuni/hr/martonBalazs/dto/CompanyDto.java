@@ -2,12 +2,22 @@ package hu.webuni.hr.martonBalazs.dto;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import hu.webuni.hr.martonBalazs.web.View;
+
+
 public class CompanyDto {
 	
+	@JsonView(View.OnlyCompany.class)
 	private Long id;
+	@JsonView(View.OnlyCompany.class)
 	private int registrationNumber;
+	@JsonView(View.OnlyCompany.class)
 	private String name;
+	@JsonView(View.OnlyCompany.class)
 	private String adress;
+	@JsonView(View.OnlyCompany.class)
 	ArrayList<EmployeeDto> employees = new ArrayList<>();
 	
 	public CompanyDto() {

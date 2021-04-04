@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import hu.webuni.hr.martonBalazs.dto.CompanyDto;
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
@@ -44,6 +48,15 @@ public class CompanyController {
 	@GetMapping
 	public List<CompanyDto> getAll() {
 		return new ArrayList<> (companies.values());
+	}
+	
+	@GetMapping(params="full=true")
+	@JsonView(View.OnlyCompany.class)
+	public List<CompanyDto> getOnlyCompany(@RequestParam Boolean full) {
+		if (full = false || full == null) {
+			return new ArrayList<> (companies.values());
+		}
+		return null;
 	}
 	
 	@GetMapping("/{id}")
