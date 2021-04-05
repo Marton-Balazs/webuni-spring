@@ -52,10 +52,11 @@ public class CompanyController {
 	
 	@GetMapping(params="full=false")
 	@JsonView(View.OnlyCompany.class)
-	public List<CompanyDto> getOnlyCompany(@RequestParam Boolean full) {
-		if (full == false || full == null) {	
+	public List<CompanyDto> getOnlyCompany(@RequestParam String full) {
+		if (full.equals("false") || full.isEmpty()) {	
+			return new ArrayList<> (companies.values());
 		}
-		return new ArrayList<> (companies.values());
+		return null;
 	}
 	
 	@GetMapping("/{id}")
@@ -86,6 +87,33 @@ public class CompanyController {
 	@DeleteMapping("/{id}")
 	public void deleteCompany(@PathVariable long id) {
 		companies.remove(id);
+	}
+	
+	//meglévő céghez új alkalmazott vehető fel
+	@PostMapping("/{id}")
+	public CompanyDto addNewEmployee(@PathVariable long id, @RequestBody EmployeeDto employeeDto ) {
+		CompanyDto companyDto = companies.get(id);
+		companyDto.getEmployees().add(employeeDto);
+		return companyDto;
+	}
+	
+	//cég alkalmazottai közül id alapján törölhető egy
+	@DeleteMapping("/{id}/employee/{employee}")
+	public ResponseEntity<CompanyDto> deleteEmployeeFromCompany(@PathVariable long id, @PathVariable long employee) {
+		CompanyDto companyDto = companies.get(id);
+		EmployeeDto employeeDto = companyDto.getEmployees().stream().filter(e -> employee == e.getId()).findFirst().orElse(null);
+		companyDto.getEmployees().remove(employeeDto);
+		return ResponseEntity.noContent().build();
+	}
+	
+	//az alkalmazotti lista lecserélhető egy mésikra
+	@PutMapping("/{id}/employees")
+	public CompanyDto replaceEmoloyeesList(@PathVariable long id, @RequestBody ArrayList<EmployeeDto> employees) {
+		//id alapján kivesszem a companyDto-t a mapből:
+		CompanyDto companyDto = companies.get(id);
+		companyDto.getEmployees().clear();
+		companyDto.getEmployees().addAll(employees);
+		return companyDto;
 	}
 
 }
