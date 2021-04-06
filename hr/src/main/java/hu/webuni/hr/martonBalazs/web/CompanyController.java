@@ -45,18 +45,15 @@ public class CompanyController {
 		
 	}
 	
-	@GetMapping
+	@GetMapping(params="full=true")
 	public List<CompanyDto> getAll() {
 		return new ArrayList<> (companies.values());
 	}
 	
-	@GetMapping(params="full=false")
+	@GetMapping
 	@JsonView(View.OnlyCompany.class)
-	public List<CompanyDto> getOnlyCompany(@RequestParam String full) {
-		if (full.equals("false") || full.isEmpty()) {	
-			return new ArrayList<> (companies.values());
-		}
-		return null;
+	public List<CompanyDto> getOnlyCompany(@RequestParam(required = false) Boolean full) {
+		return new ArrayList<> (companies.values());
 	}
 	
 	@GetMapping("/{id}")
