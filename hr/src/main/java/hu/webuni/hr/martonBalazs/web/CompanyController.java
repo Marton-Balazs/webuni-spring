@@ -23,6 +23,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import hu.webuni.hr.martonBalazs.dto.CompanyDto;
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
+import hu.webuni.hr.martonBalazs.model.Employee;
+import hu.webuni.hr.martonBalazs.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api/companies")
@@ -31,6 +33,7 @@ public class CompanyController {
 	private Map<Long, CompanyDto> companies = new HashMap<>();
 	ArrayList<EmployeeDto> employees1 = new ArrayList<>();
 	ArrayList<EmployeeDto> employees2 = new ArrayList<>();
+	EmployeeService employeeService;
 	
 	{
 		companies.put(1L, new CompanyDto(1L, 100000, "T-Systems", "1118 Bp Neumann János u 1/b", employees1));
@@ -114,6 +117,11 @@ public class CompanyController {
 		companyDto.getEmployees().clear();
 		companyDto.getEmployees().addAll(employees);
 		return companyDto;
+	}
+	
+	@PostMapping("/payRaise")
+	public int getPayRaise(@RequestBody Employee employee) {
+		return employeeService.getPayRaisePercent(employee);
 	}
 
 }
