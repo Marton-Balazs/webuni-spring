@@ -15,7 +15,8 @@ public class SalaryController {
 	
 	@Autowired
 	EmployeeService employeeService;
-
+	
+	//return the raised salary
 	@GetMapping
 	public int getEmployeePaymentRise(@RequestBody Employee employee ){
 		return employeeService.getPayRaisePercent(employee);
