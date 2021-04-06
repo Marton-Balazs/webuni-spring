@@ -45,18 +45,15 @@ public class CompanyController {
 		
 	}
 	
-	@GetMapping
+	@GetMapping(params="full=true")
 	public List<CompanyDto> getAll() {
 		return new ArrayList<> (companies.values());
 	}
 	
-	@GetMapping(params="full=false")
+	@GetMapping
 	@JsonView(View.OnlyCompany.class)
-	public List<CompanyDto> getOnlyCompany(@RequestParam String full) {
-		if (full.equals("false") || full.isEmpty()) {	
-			return new ArrayList<> (companies.values());
-		}
-		return null;
+	public List<CompanyDto> getOnlyCompany(@RequestParam(required = false) Boolean full) {
+		return new ArrayList<> (companies.values());
 	}
 	
 	@GetMapping("/{id}")
@@ -92,6 +89,7 @@ public class CompanyController {
 	//meglévő céghez új alkalmazott vehető fel
 	@PostMapping("/{id}")
 	public CompanyDto addNewEmployee(@PathVariable long id, @RequestBody EmployeeDto employeeDto ) {
+		//id alapján kivesszem a companyDto-t a mapből:
 		CompanyDto companyDto = companies.get(id);
 		companyDto.getEmployees().add(employeeDto);
 		return companyDto;
@@ -100,6 +98,7 @@ public class CompanyController {
 	//cég alkalmazottai közül id alapján törölhető egy
 	@DeleteMapping("/{id}/employee/{employee}")
 	public ResponseEntity<CompanyDto> deleteEmployeeFromCompany(@PathVariable long id, @PathVariable long employee) {
+		//id alapján kivesszem a companyDto-t a mapből:
 		CompanyDto companyDto = companies.get(id);
 		EmployeeDto employeeDto = companyDto.getEmployees().stream().filter(e -> employee == e.getId()).findFirst().orElse(null);
 		companyDto.getEmployees().remove(employeeDto);
