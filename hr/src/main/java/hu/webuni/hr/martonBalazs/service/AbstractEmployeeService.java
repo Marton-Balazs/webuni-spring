@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
 import hu.webuni.hr.martonBalazs.model.Employee;
 
 @Service
