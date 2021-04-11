@@ -1,4 +1,4 @@
-package hu.webuni.hr.martonBalazs.dto;
+package hu.webuni.hr.martonBalazs.model;
 
 import java.time.LocalDateTime;
 

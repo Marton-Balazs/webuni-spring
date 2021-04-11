@@ -7,7 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,68 +23,74 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
+import hu.webuni.hr.martonBalazs.mapper.EmployeeMapper;
+import hu.webuni.hr.martonBalazs.model.Employee;
+import hu.webuni.hr.martonBalazs.service.EmployeeService2;
+import hu.webuni.hr.martonBalazs.service.NonUniqueIDException;
 
 @RestController
 @RequestMapping("/api/employees")
 public class HrController {
 	
-	private Map<Long, EmployeeDto> employees = new HashMap<>();
+	@Autowired
+	EmployeeService2 employeeService2;
 	
-	{
-		employees.put(1L, new EmployeeDto(1L, "Balazs", "developer", 5000, LocalDateTime.parse("2000-03-11T10:00:00")));
-		employees.put(2L, new EmployeeDto(2L, "Alajos", "intern", 120, LocalDateTime.parse("2020-01-04T09:00:00")));
-		employees.put(3L, new EmployeeDto(3L, "Gyula", "recepcionist", 500, LocalDateTime.parse("2015-11-20T09:00:00")));
-		employees.put(4L, new EmployeeDto(4L, "Kata", "pepsi cola giver", 4500, LocalDateTime.parse("2005-10-10T09:00:00")));
-	}
+	@Autowired
+	EmployeeMapper employeeMapper;
 	
-	@GetMapping(params="minSalary")
-	public List<EmployeeDto> getMinSalary(@RequestParam int minSalary) {
-		ArrayList<EmployeeDto> specialEmployee = new ArrayList<>();
-		for(Entry<Long, EmployeeDto> entry : employees.entrySet()) {
-		    EmployeeDto edto = entry.getValue();
-		    if (edto.getSalary() > minSalary && minSalary > 0) {
-		    	specialEmployee.add(edto);
-			}
-		}
-		return specialEmployee;
-	}
+
+	
+//	@GetMapping(params="minSalary")
+//	public List<EmployeeDto> getMinSalary(@RequestParam int minSalary) {
+//		ArrayList<EmployeeDto> specialEmployee = new ArrayList<>();
+//		for(Entry<Long, EmployeeDto> entry : employees.entrySet()) {
+//		    EmployeeDto edto = entry.getValue();
+//		    if (edto.getSalary() > minSalary && minSalary > 0) {
+//		    	specialEmployee.add(edto);
+//			}
+//		}
+//		return specialEmployee;
+//	}
 	
 	
 	@GetMapping
 	public List<EmployeeDto> getAll() {
-		return new ArrayList<> (employees.values());
+		return employeeMapper.employeesToDtos(employeeService2.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<EmployeeDto> getByid(@PathVariable long id) {
-		EmployeeDto employeeDto = employees.get(id);
-		if (employeeDto != null) {
-			return ResponseEntity.ok(employeeDto);
-		}
-		return ResponseEntity.notFound().build();
+	public EmployeeDto getByid(@PathVariable long id) {
+		Employee employee = employeeService2.findById(id);
+		if (employee != null) {
+			return employeeMapper.employeesToDto(employee);
+		} else
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	}
 	
 	@PostMapping
-	public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto) {
-		employees.put(employeeDto.getId(), employeeDto);
-		return employeeDto;
+	public EmployeeDto createEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
+		Employee employee = employeeService2.save(employeeMapper.dtoToEmployee(employeeDto));
+		return employeeMapper.employeesToDto(employee);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<EmployeeDto> modifyEmployee(@RequestBody EmployeeDto employeeDto, @PathVariable long id) {
-		if (!employees.containsKey(id)) {
-		return ResponseEntity.notFound().build();
-		}
-		employeeDto.setId(id);
-		employees.put(id, employeeDto);
-		return ResponseEntity.ok(employeeDto);
-	}
-	
-	@DeleteMapping("/{id}")
-	public void deleteEmployee(@PathVariable long id) {
-		employees.remove(id);
-	}
+//	@PutMapping("/{id}")
+//	public ResponseEntity<EmployeeDto> modifyEmployee(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable long id) {
+//		if (!employees.containsKey(id)) {
+//		return ResponseEntity.notFound().build();
+//		}
+//		checkUniqueId(employeeDto.getId());
+//		employeeDto.setId(id);
+//		employees.put(id, employeeDto);
+//		return ResponseEntity.ok(employeeDto);
+//	}
+
+
+//	@DeleteMapping("/{id}")
+//	public void deleteEmployee(@PathVariable long id) {
+//		employees.remove(id);
+//	}
 
 }

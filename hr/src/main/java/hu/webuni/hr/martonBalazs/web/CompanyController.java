@@ -48,7 +48,6 @@ public class CompanyController {
 		
 	}
 	
-	//can i commit?
 	@GetMapping(params="full=true")
 	public List<CompanyDto> getAll() {
 		return new ArrayList<> (companies.values());
