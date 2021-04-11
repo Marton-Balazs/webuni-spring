@@ -28,7 +28,7 @@ import org.springframework.web.server.ResponseStatusException;
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
 import hu.webuni.hr.martonBalazs.mapper.EmployeeMapper;
 import hu.webuni.hr.martonBalazs.model.Employee;
-import hu.webuni.hr.martonBalazs.service.EmployeeService2;
+import hu.webuni.hr.martonBalazs.service.AbstractEmployeeService;
 import hu.webuni.hr.martonBalazs.service.NonUniqueIDException;
 
 @RestController
@@ -36,11 +36,10 @@ import hu.webuni.hr.martonBalazs.service.NonUniqueIDException;
 public class HrController {
 	
 	@Autowired
-	EmployeeService2 employeeService2;
+	AbstractEmployeeService abstractEmployeeService;
 	
 	@Autowired
 	EmployeeMapper employeeMapper;
-	
 
 	
 //	@GetMapping(params="minSalary")
@@ -58,12 +57,12 @@ public class HrController {
 	
 	@GetMapping
 	public List<EmployeeDto> getAll() {
-		return employeeMapper.employeesToDtos(employeeService2.findAll());
+		return employeeMapper.employeesToDtos(abstractEmployeeService.findAll());
 	}
 	
 	@GetMapping("/{id}")
 	public EmployeeDto getByid(@PathVariable long id) {
-		Employee employee = employeeService2.findById(id);
+		Employee employee = abstractEmployeeService.findById(id);
 		if (employee != null) {
 			return employeeMapper.employeesToDto(employee);
 		} else
@@ -72,7 +71,7 @@ public class HrController {
 	
 	@PostMapping
 	public EmployeeDto createEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
-		Employee employee = employeeService2.save(employeeMapper.dtoToEmployee(employeeDto));
+		Employee employee = abstractEmployeeService.save(employeeMapper.dtoToEmployee(employeeDto));
 		return employeeMapper.employeesToDto(employee);
 	}
 	

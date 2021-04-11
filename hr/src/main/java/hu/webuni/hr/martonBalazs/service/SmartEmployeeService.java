@@ -10,7 +10,7 @@ import hu.webuni.hr.martonBalazs.config.HrConfigProperties;
 import hu.webuni.hr.martonBalazs.model.Employee;
 
 @Service
-public class SmartEmployeeService extends AbstractEmployeeService{
+public class SmartEmployeeService implements EmployeeService{
 	
 //	@Value("${hr.employee.special.limitVeryGood}")
 //	private int limitVeryGood;
