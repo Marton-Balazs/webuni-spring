@@ -10,6 +10,8 @@ public interface EmployeeService {
 	
 	public Employee save(Employee employee);
 	
+	public Employee update(Employee employee);
+	
 	public List<Employee> findAll();
 	
 	public Employee findById(long id);

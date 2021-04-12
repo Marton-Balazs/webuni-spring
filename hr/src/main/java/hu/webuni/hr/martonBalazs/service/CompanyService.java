@@ -39,6 +39,11 @@ public class CompanyService {
 		return company;
 	}
 	
+	public Company update(Company company) {
+		companies.put(company.getId(), company);
+		return company;
+	}
+	
 	public List<Company> findAll() {
 		return new ArrayList<>(companies.values());
 	}

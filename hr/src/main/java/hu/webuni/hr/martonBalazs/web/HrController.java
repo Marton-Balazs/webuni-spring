@@ -76,21 +76,26 @@ public class HrController {
 		return employeeMapper.employeesToDto(employee);
 	}
 	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<EmployeeDto> modifyEmployee(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable long id) {
-//		if (!employees.containsKey(id)) {
-//		return ResponseEntity.notFound().build();
-//		}
-//		checkUniqueId(employeeDto.getId());
-//		employeeDto.setId(id);
-//		employees.put(id, employeeDto);
-//		return ResponseEntity.ok(employeeDto);
-//	}
+	@PutMapping("/{id}")
+	public EmployeeDto modifyEmployee(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable long id) {
+		Employee employee = employeeService.update(employeeMapper.dtoToEmployee(employeeDto));
+		
+		return employeeMapper.employeesToDto(employee);
+	
+		/*
+		if (!employees.containsKey(id)) {
+		return ResponseEntity.notFound().build();
+		}
+		checkUniqueId(employeeDto.getId());
+		employeeDto.setId(id);
+		employees.put(id, employeeDto);
+		return ResponseEntity.ok(employeeDto);
+		*/
+	}
 
-
-//	@DeleteMapping("/{id}")
-//	public void deleteEmployee(@PathVariable long id) {
-//		employees.remove(id);
-//	}
+	@DeleteMapping("/{id}")
+	public void deleteEmployee(@PathVariable long id) {
+		employeeService.delete(id);
+	}
 
 }

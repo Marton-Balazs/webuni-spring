@@ -72,21 +72,26 @@ public class CompanyController {
 		return companyMapper.companiesToDto(company);
 	}
 	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<CompanyDto> modifyCompany(@RequestBody CompanyDto companyDto, @PathVariable long id) {
-//		if (!companies.containsKey(id)) {
-//		return ResponseEntity.notFound().build();
-//		}
-//		companyDto.setId(id);
-//		companies.put(id, companyDto);
-//		return ResponseEntity.ok(companyDto);
-//	}
-//	
-//	@DeleteMapping("/{id}")
-//	public void deleteCompany(@PathVariable long id) {
-//		companies.remove(id);
-//	}
-//	
+	@PutMapping("/{id}")
+	public CompanyDto modifyCompany(@RequestBody CompanyDto companyDto, @PathVariable long id) {
+		Company company = companyService.update(companyMapper.dtoToCompany(companyDto));
+		return companyMapper.companiesToDto(company);
+		
+		/*
+		if (!companies.containsKey(id)) {
+		return ResponseEntity.notFound().build();
+		}
+		companyDto.setId(id);
+		companies.put(id, companyDto);
+		return ResponseEntity.ok(companyDto);
+		*/
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteCompany(@PathVariable long id) {
+		companyService.delete(id);
+	}
+	
 //	//meglévő céghez új alkalmazott vehető fel
 //	@PostMapping("/{id}")
 //	public CompanyDto addNewEmployee(@PathVariable long id, @RequestBody EmployeeDto employeeDto ) {

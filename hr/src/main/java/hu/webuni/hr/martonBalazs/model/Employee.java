@@ -2,12 +2,21 @@ package hu.webuni.hr.martonBalazs.model;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Positive;
+
 public class Employee {
 	
 	private Long id;
+	
+	@NotBlank(message = "Name is mandatory")
 	private String name;
+	@NotBlank(message = "Position is mandatory")
 	private String position;
+	@Positive(message = "Salary must be positive")
 	private int salary;
+	@Past(message = "Entry date can not be in the future")
 	private LocalDateTime startDate;
 	
 	public Employee() {

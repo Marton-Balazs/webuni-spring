@@ -30,6 +30,11 @@ public abstract class AbstractEmployeeService implements EmployeeService {
 		return employee;
 	}
 	
+	public Employee update(Employee employee) {
+		employees.put(employee.getId(), employee);
+		return employee;
+	}
+	
 	public List<Employee> findAll() {
 		return new ArrayList<>(employees.values());
 	}
