@@ -10,6 +10,10 @@ import hu.webuni.hr.martonBalazs.model.Employee;
 public class DefaultEmployeeService extends AbstractEmployeeService{
 	
 
+	public DefaultEmployeeService(EmployeeRepository employeeRepository) {
+		super(employeeRepository);
+	}
+
 	@Override
 	public int getPayRaisePercent(Employee employee) {
 		return 5;
