@@ -1,3 +1,4 @@
+
 package hu.webuni.hr.martonBalazs.config;
 
 import org.springframework.context.annotation.Bean;
@@ -16,5 +17,4 @@ public class DefaultEmployeeConfiguration {
 	public EmployeeService employeeService(EmployeeRepository employeeRepository) {
 		return new DefaultEmployeeService(employeeRepository);
 	}
-
 }

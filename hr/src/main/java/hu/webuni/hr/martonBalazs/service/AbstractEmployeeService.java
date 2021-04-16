@@ -16,12 +16,12 @@ import hu.webuni.hr.martonBalazs.model.Employee;
 @Service
 public abstract class AbstractEmployeeService implements EmployeeService {
 	
-	@Autowired
-	EmployeeRepository employeeRepository;
 	
+	EmployeeRepository employeeRepository;
+
 	public AbstractEmployeeService(EmployeeRepository employeeRepository) {
 			this.employeeRepository = employeeRepository;
-		}
+	}
 
 //	private Map<Long, Employee> employees = new HashMap<>();
 //	

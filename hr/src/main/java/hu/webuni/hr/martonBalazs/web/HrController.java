@@ -74,10 +74,11 @@ public class HrController {
 	}
 	
 	@PutMapping("/{id}")
-	public EmployeeDto modifyEmployee(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable long id) {
-		Employee employee = employeeService.update(employeeMapper.dtoToEmployee(employeeDto));
-		
-		return employeeMapper.employeesToDto(employee);
+	public ResponseEntity<EmployeeDto> modifyEmployee(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable long id) {
+		Employee employee = employeeMapper.dtoToEmployee(employeeDto);
+		employee.setId(id);
+		EmployeeDto savedEmployeeDto = employeeMapper.employeesToDto(employeeService.update(employee));
+		return ResponseEntity.ok(savedEmployeeDto);
 	
 		/*
 		if (!employees.containsKey(id)) {

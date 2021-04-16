@@ -36,14 +36,13 @@ public class SmartEmployeeService extends AbstractEmployeeService {
 //	private int percentNothing;
 	
 
-
 	public SmartEmployeeService(EmployeeRepository employeeRepository) {
 		super(employeeRepository);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Autowired
 	HrConfigProperties config;
+	
 
 	@Override
 	public int getPayRaisePercent(Employee employee) {

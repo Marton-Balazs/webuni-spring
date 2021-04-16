@@ -7,9 +7,8 @@ import hu.webuni.hr.martonBalazs.Repository.EmployeeRepository;
 import hu.webuni.hr.martonBalazs.model.Employee;
 
 @Service
-public class DefaultEmployeeService extends AbstractEmployeeService{
+public class DefaultEmployeeService extends AbstractEmployeeService {
 	
-
 	public DefaultEmployeeService(EmployeeRepository employeeRepository) {
 		super(employeeRepository);
 	}
