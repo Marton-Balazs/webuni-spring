@@ -2,12 +2,18 @@ package hu.webuni.hr.martonBalazs.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
 
+@Entity
 public class Employee {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
 	
 	@NotBlank(message = "Name is mandatory")

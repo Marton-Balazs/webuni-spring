@@ -63,11 +63,8 @@ public class HrController {
 	
 	@GetMapping("/{id}")
 	public EmployeeDto getByid(@PathVariable long id) {
-		Employee employee = employeeService.findById(id);
-		if (employee != null) {
-			return employeeMapper.employeesToDto(employee);
-		} else
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		Employee employee = employeeService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		return employeeMapper.employeesToDto(employee);
 	}
 	
 	@PostMapping

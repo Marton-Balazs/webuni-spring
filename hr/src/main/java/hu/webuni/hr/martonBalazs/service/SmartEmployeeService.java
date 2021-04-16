@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import hu.webuni.hr.martonBalazs.Repository.EmployeeRepository;
 import hu.webuni.hr.martonBalazs.config.HrConfigProperties;
 import hu.webuni.hr.martonBalazs.model.Employee;
 
 @Service
 public class SmartEmployeeService extends AbstractEmployeeService {
 	
-	
+
 //	@Value("${hr.employee.special.limitVeryGood}")
 //	private int limitVeryGood;
 //	
@@ -34,6 +35,13 @@ public class SmartEmployeeService extends AbstractEmployeeService {
 //	@Value("${hr.employee.special.percentNothing}")
 //	private int percentNothing;
 	
+
+
+	public SmartEmployeeService(EmployeeRepository employeeRepository) {
+		super(employeeRepository);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Autowired
 	HrConfigProperties config;
 
