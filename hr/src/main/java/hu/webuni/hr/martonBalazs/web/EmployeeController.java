@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Map.Entry;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import hu.webuni.hr.martonBalazs.Repository.EmployeeRepository;
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
 import hu.webuni.hr.martonBalazs.mapper.EmployeeMapper;
 import hu.webuni.hr.martonBalazs.model.Employee;
@@ -34,13 +37,16 @@ import hu.webuni.hr.martonBalazs.service.NonUniqueIDException;
 
 @RestController
 @RequestMapping("/api/employees")
-public class HrController {
+public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService;
 	
 	@Autowired
 	EmployeeMapper employeeMapper;
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
 
 	
 //	@GetMapping(params="minSalary")
@@ -77,23 +83,37 @@ public class HrController {
 	public ResponseEntity<EmployeeDto> modifyEmployee(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable long id) {
 		Employee employee = employeeMapper.dtoToEmployee(employeeDto);
 		employee.setId(id);
-		EmployeeDto savedEmployeeDto = employeeMapper.employeesToDto(employeeService.update(employee));
-		return ResponseEntity.ok(savedEmployeeDto);
-	
-		/*
-		if (!employees.containsKey(id)) {
-		return ResponseEntity.notFound().build();
+		try {
+			EmployeeDto savedEmployeeDto = employeeMapper.employeesToDto(employeeService.update(employee));
+			return ResponseEntity.ok(savedEmployeeDto);
+		} catch (NoSuchElementException e){
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		checkUniqueId(employeeDto.getId());
-		employeeDto.setId(id);
-		employees.put(id, employeeDto);
-		return ResponseEntity.ok(employeeDto);
-		*/
+		
 	}
 
 	@DeleteMapping("/{id}")
 	public void deleteEmployee(@PathVariable long id) {
 		employeeService.delete(id);
 	}
+	
+	@GetMapping("/position")
+	public List<EmployeeDto> findEmployeesByPosition(@RequestParam String position) {
+		List<Employee> employees = employeeRepository.findByPosition(position);
+		return employeeMapper.employeesToDtos(employees);
+	}
+	
+	@GetMapping("/name")
+	public List<EmployeeDto> findEmployeesByStartName(@RequestParam String name) {
+		List<Employee> employees = employeeRepository.findByNameStartingWith(name);
+		return employeeMapper.employeesToDtos(employees);
+	}
+	
+	@GetMapping("/start-date")
+	public List<EmployeeDto> findEmployeesByDate(@RequestParam LocalDateTime start, @RequestParam LocalDateTime end) {
+		List<Employee> employees = employeeRepository.findByStartDateBetween(start, end);
+		return employeeMapper.employeesToDtos(employees);
+	}
+	
 
 }
