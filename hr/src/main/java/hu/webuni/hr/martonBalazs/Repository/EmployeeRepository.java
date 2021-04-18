@@ -12,7 +12,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 	
 	List<Employee> findByPosition(String position);
 	
-	List<Employee> findByNameStartingWith(String name);
+	List<Employee> findByNameStartingWithIgnoreCase(String name);
 	
 	List<Employee> findByStartDateBetween(LocalDateTime start, LocalDateTime end);
 	

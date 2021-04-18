@@ -27,7 +27,8 @@ public class Company {
 	@JsonView(View.OnlyCompany.class)
 	private String adress;
 	
-	@OneToMany
+	
+	@OneToMany(mappedBy="company")
 	List<Employee> employees = new ArrayList<>();
 	
 	

@@ -47,19 +47,6 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
-
-	
-//	@GetMapping(params="minSalary")
-//	public List<EmployeeDto> getMinSalary(@RequestParam int minSalary) {
-//		ArrayList<EmployeeDto> specialEmployee = new ArrayList<>();
-//		for(Entry<Long, EmployeeDto> entry : employees.entrySet()) {
-//		    EmployeeDto edto = entry.getValue();
-//		    if (edto.getSalary() > minSalary && minSalary > 0) {
-//		    	specialEmployee.add(edto);
-//			}
-//		}
-//		return specialEmployee;
-//	}
 	
 	
 	@GetMapping
@@ -105,7 +92,7 @@ public class EmployeeController {
 	
 	@GetMapping("/name")
 	public List<EmployeeDto> findEmployeesByStartName(@RequestParam String name) {
-		List<Employee> employees = employeeRepository.findByNameStartingWith(name);
+		List<Employee> employees = employeeRepository.findByNameStartingWithIgnoreCase(name);
 		return employeeMapper.employeesToDtos(employees);
 	}
 	
