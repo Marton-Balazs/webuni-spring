@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
@@ -24,6 +26,10 @@ public class Employee {
 	private int salary;
 	@Past(message = "Entry date can not be in the future")
 	private LocalDateTime startDate;
+	
+	//1 céghez több employee tartozhat
+	@ManyToOne
+	private Company company;
 	
 	public Employee() {
 	}

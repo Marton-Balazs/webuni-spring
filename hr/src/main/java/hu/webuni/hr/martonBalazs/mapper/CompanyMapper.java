@@ -13,7 +13,7 @@ public interface CompanyMapper {
 	
 	List<CompanyDto> companiesToDtos(List<Company> companies);
 
-	CompanyDto companiesToDto(Company company);
+	CompanyDto companyToDto(Company company);
 
 	Company dtoToCompany(CompanyDto companyDto);
 
