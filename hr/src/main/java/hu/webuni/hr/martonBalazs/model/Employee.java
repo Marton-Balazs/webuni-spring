@@ -20,8 +20,7 @@ public class Employee {
 	
 	@NotBlank(message = "Name is mandatory")
 	private String name;
-	@NotBlank(message = "Position is mandatory")
-	private String position;
+
 	@Positive(message = "Salary must be positive")
 	private int salary;
 	@Past(message = "Entry date can not be in the future")
@@ -31,13 +30,15 @@ public class Employee {
 	@ManyToOne
 	private Company company;
 	
+	@ManyToOne
+	private Position position;
+	
 	public Employee() {
 	}
 
-	public Employee(Long id, String name, String position, int salary, LocalDateTime startDate) {
+	public Employee(Long id, String name, int salary, LocalDateTime startDate) {
 		this.id = id;
 		this.name = name;
-		this.position = position;
 		this.salary = salary;
 		this.startDate = startDate;
 	}
@@ -58,14 +59,6 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
 	public int getSalary() {
 		return salary;
 	}
@@ -81,4 +74,22 @@ public class Employee {
 	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+	
+	
 }

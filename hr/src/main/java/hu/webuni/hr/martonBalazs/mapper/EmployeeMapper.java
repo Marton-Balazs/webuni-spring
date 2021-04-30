@@ -2,9 +2,8 @@ package hu.webuni.hr.martonBalazs.mapper;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
 import hu.webuni.hr.martonBalazs.model.Employee;
@@ -13,9 +12,12 @@ import hu.webuni.hr.martonBalazs.model.Employee;
 public interface EmployeeMapper {
 	
 	List<EmployeeDto> employeesToDtos(List<Employee> employees);
-
-	EmployeeDto employeesToDto(Employee employee);
-
+	
+	List<Employee> dtosToEmployees(List<EmployeeDto> dtos);
+	
+	@Mapping(target = "position", source = "position.name")
+	EmployeeDto employeeToDto(Employee employee);
+	
+	
 	Employee dtoToEmployee(EmployeeDto employeeDto);
-
 }

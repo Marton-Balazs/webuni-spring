@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import hu.webuni.hr.martonBalazs.model.Employee;
+import hu.webuni.hr.martonBalazs.service.InitDbService;
 import hu.webuni.hr.martonBalazs.service.SalaryService;
 
 @SpringBootApplication
@@ -15,6 +16,11 @@ public class HrApplication implements CommandLineRunner{
 	
 	@Autowired
 	SalaryService salaryService;
+	
+	@Autowired
+	InitDbService initDbService;
+	
+	
 	
 //	Employee e1 = new Employee(1L, "Balazs", "developer", 1000, LocalDateTime.parse("2013-03-11T10:00:00")); 	//8év 3hónap 5% = 1050
 //	Employee e2 = new Employee(2L, "Kata", "tester", 500, LocalDateTime.parse("2010-01-01T09:00:00"));			//10év+ 10% = 550
@@ -30,12 +36,7 @@ public class HrApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-//		System.out.println(salaryService.getNewSalary(e1));
-//		System.out.println(salaryService.getNewSalary(e2));
-//		System.out.println(salaryService.getNewSalary(e3));
-//		System.out.println(salaryService.getNewSalary(e4));
-//		System.out.println(salaryService.getNewSalary(e5));
-//		System.out.println(salaryService.getNewSalary(e6));
-//		System.out.println(salaryService.getNewSalary(e7));
+		//initDbService.clearDb();
+		//initDbService.insertTestData();
 	}
 }

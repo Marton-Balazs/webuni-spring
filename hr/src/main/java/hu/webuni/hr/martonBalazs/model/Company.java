@@ -6,12 +6,16 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import hu.webuni.hr.martonBalazs.web.View;
 
+@NamedEntityGraph(name = "Company.full", attributeNodes = @NamedAttributeNode("employees"))
 @Entity
 public class Company {
 	
@@ -25,23 +29,42 @@ public class Company {
 	@JsonView(View.OnlyCompany.class)
 	private String name;
 	@JsonView(View.OnlyCompany.class)
-	private String adress;
+	private String address;
 	
 	
+	//ha ennek a companynak a listájába berakok egy employeet, akkor magától ennek az employeenak a companyje nem fog átállni erre a comapanyre. Ezért kell ide az addEmployee metódus
 	@OneToMany(mappedBy="company")
 	List<Employee> employees = new ArrayList<>();
 	
+	@ManyToOne
+	private CompanyType companyType;
 	
 	public Company() {
 		
 	}
 
-	public Company(Long id, int registrationNumber, String name, String adress, ArrayList<Employee> employees) {
+	public Company(Long id, int registrationNumber, String name, String adress, List<Employee> employees) {
 		this.id = id;
 		this.registrationNumber = registrationNumber;
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.employees = employees;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public CompanyType getCompanyType() {
+		return companyType;
+	}
+
+	public void setCompanyType(CompanyType companyType) {
+		this.companyType = companyType;
 	}
 
 	public int getRegistrationNumber() {
@@ -69,11 +92,11 @@ public class Company {
 	}
 
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 
 	public void setAdress(String adress) {
-		this.adress = adress;
+		this.address = adress;
 	}
 
 	public List<Employee> getEmployees() {
@@ -82,6 +105,16 @@ public class Company {
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+	}
+	//Így két irányból rendbe raktuk a kapcsolatot
+	public void addEmployee(Employee employee) {
+		if (this.employees == null) {
+			this.employees = new ArrayList<>();
+		} else {
+			this.employees.add(employee);
+			employee.setCompany(this);
+		}
+		
 	}
 
 }
