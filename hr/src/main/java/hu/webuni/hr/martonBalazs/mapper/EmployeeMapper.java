@@ -18,6 +18,6 @@ public interface EmployeeMapper {
 	@Mapping(target = "position", source = "position.name")
 	EmployeeDto employeeToDto(Employee employee);
 	
-	
+	@Mapping(target = "position.name", source = "position")
 	Employee dtoToEmployee(EmployeeDto employeeDto);
 }

@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import hu.webuni.hr.martonBalazs.model.AverageSalaryByPosition;
 import hu.webuni.hr.martonBalazs.model.Company;
-import hu.webuni.hr.martonBalazs.model.Employee;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 	

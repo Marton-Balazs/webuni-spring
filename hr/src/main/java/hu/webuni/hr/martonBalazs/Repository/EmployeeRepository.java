@@ -2,7 +2,6 @@ package hu.webuni.hr.martonBalazs.Repository;
 
 import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
