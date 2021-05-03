@@ -26,7 +26,7 @@ public class Employee {
 	@Past(message = "Entry date can not be in the future")
 	private LocalDateTime startDate;
 	
-	//1 céghez több employee tartozhat
+	//1 céghez több employee tartozhat:
 	@ManyToOne
 	private Company company;
 	
