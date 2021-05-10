@@ -55,7 +55,7 @@ public class CompanyController {
 //		return full == null || full == false ? companyMapper.companySummariesToDtos(companies) : companyMapper.companiesToDtos(companies);
 //	}
 	
-	//open in view false és quryt írtunk a companyRepoban:
+	//open in view false és queryt írtunk a companyRepoban:
 	@GetMapping
 	public List<CompanyDto> getCompanys(@RequestParam(required = false) Boolean full) {
 		List<Company> companies = null;

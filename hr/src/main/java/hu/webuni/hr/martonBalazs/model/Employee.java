@@ -33,14 +33,18 @@ public class Employee {
 	@ManyToOne
 	private Position position;
 	
+	@ManyToOne
+	private Employee supervisor;
+	
 	public Employee() {
 	}
 
-	public Employee(Long id, String name, int salary, LocalDateTime startDate) {
+	public Employee(Long id, String name, int salary, LocalDateTime startDate, Employee supervisor) {
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
 		this.startDate = startDate;
+		this.supervisor = supervisor;
 	}
 
 	public Long getId() {

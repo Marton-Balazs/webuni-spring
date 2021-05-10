@@ -16,7 +16,6 @@ public class Position {
 	private int id;
 	private String name;
 	private Qualification qualification;
-	private int minSaraly;
 	
 	
 	//position irányából el kell érnem a hozzá tartozó employeekat is, ezért fel kjell venni az irányát ennek a kapcsolatnak is:
@@ -26,13 +25,10 @@ public class Position {
 	public Position() {
 	}
 
-	public Position(String name, Qualification qualification, int minSaraly) {
+	public Position(String name, Qualification qualification) {
 		this.name = name;
 		this.qualification = qualification;
-		this.minSaraly = minSaraly;
 	}
-	
-	
 	
 	public List<Employee> getEmployees() {
 		return employees;
@@ -59,12 +55,6 @@ public class Position {
 	}
 	public void setQualification(Qualification qualification) {
 		this.qualification = qualification;
-	}
-	public int getMinSaraly() {
-		return minSaraly;
-	}
-	public void setMinSaraly(int minSaraly) {
-		this.minSaraly = minSaraly;
 	}
 
 }

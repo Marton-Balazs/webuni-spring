@@ -15,9 +15,9 @@ public class SalaryController {
 	@Autowired
 	SalaryService salaryService;
 	
-	@PutMapping("/{positionName}/raiseMin{minSalary}")
-	public void raiseMinSalary(@PathVariable String positionName, @PathVariable int minSalary) {
-		salaryService.raiseMinimumSalary(positionName, minSalary);
+	@PutMapping("/{positionName}/raiseMin/{minSalary}/{companyId}")
+	public void raiseMinSalary(@PathVariable String positionName, @PathVariable int minSalary, @PathVariable long companyId) {
+		salaryService.raiseMinimalSalary(positionName, minSalary, companyId);
 	}
 
 }

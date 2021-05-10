@@ -1,13 +1,10 @@
 package hu.webuni.hr.martonBalazs;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import hu.webuni.hr.martonBalazs.model.Employee;
 import hu.webuni.hr.martonBalazs.service.InitDbService;
 import hu.webuni.hr.martonBalazs.service.SalaryService;
 
@@ -27,6 +24,5 @@ public class HrApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		initDbService.initDb();
-		salaryService.raiseMinimumSalary("developer", 350000);
 	}
 }

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import hu.webuni.hr.martonBalazs.web.View;
 
+//Ha valamit még be kell tölteni, akkor itt kell felvenni plusz atributomként
 @NamedEntityGraph(name = "Company.full", attributeNodes = @NamedAttributeNode("employees"))
 @Entity
 public class Company {
@@ -39,6 +40,17 @@ public class Company {
 	@ManyToOne
 	private CompanyType companyType;
 	
+//	@NamedEntityGraph(
+//			name = "movieWithActorsAndAwards", 
+//			attributeNodes = {
+//					@NamedAttributeNode( value = "movieActors", subgraph = "movieActorsGraph")
+//			},
+//			subgraphs = {
+//					@NamedSubgraph(name = "movieActorsGraph", attributeNodes = {
+//							@NamedAttributeNode("movieActorAwards")
+//					})
+//			}
+//	)
 	public Company() {
 		
 	}
@@ -110,10 +122,10 @@ public class Company {
 	public void addEmployee(Employee employee) {
 		if (this.employees == null) {
 			this.employees = new ArrayList<>();
-		} else {
+		} 
 			this.employees.add(employee);
 			employee.setCompany(this);
-		}
+		
 		
 	}
 
