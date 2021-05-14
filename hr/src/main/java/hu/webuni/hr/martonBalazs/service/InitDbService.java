@@ -1,7 +1,7 @@
 package hu.webuni.hr.martonBalazs.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +65,7 @@ public class InitDbService {
 		newCompany2.addEmployee(newEmployee2);
 		newCompany2.addEmployee(newEmployee3);
 		
-		Vacation vacation = vacationRepository.save(new Vacation(LocalDateTime.now(), LocalDateTime.now(), newEmployee4, LocalDateTime.now()));
+		Vacation vacation = vacationRepository.save(new Vacation(LocalDate.now(), LocalDate.now(), newEmployee4, LocalDateTime.now()));
 		
 		PositionDetailsByCompany pd = new PositionDetailsByCompany();
 		pd.setCompany(newCompany);

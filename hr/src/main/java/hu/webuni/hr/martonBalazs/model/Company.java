@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -16,30 +17,34 @@ import com.fasterxml.jackson.annotation.JsonView;
 import hu.webuni.hr.martonBalazs.web.View;
 
 //Ha valamit még be kell tölteni, akkor itt kell felvenni plusz atributomként
-@NamedEntityGraph(name = "Company.full", attributeNodes = @NamedAttributeNode("employees"))
+@NamedEntityGraph(name = "Company.full", 
+	attributeNodes = @NamedAttributeNode(value = "employees", subgraph = "employeePosition"), 
+	subgraphs = {
+		@NamedSubgraph(name = "employeePosition", attributeNodes = { @NamedAttributeNode("position") }) })
 @Entity
 public class Company {
-	
+
 	@JsonView(View.OnlyCompany.class)
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@JsonView(View.OnlyCompany.class)
 	private int registrationNumber;
 	@JsonView(View.OnlyCompany.class)
 	private String name;
 	@JsonView(View.OnlyCompany.class)
 	private String address;
-	
-	
-	//ha ennek a companynak a listájába berakok egy employeet, akkor magától ennek az employeenak a companyje nem fog átállni erre a comapanyre. Ezért kell ide az addEmployee metódus
-	@OneToMany(mappedBy="company")
+
+	// ha ennek a companynak a listájába berakok egy employeet, akkor magától ennek
+	// az employeenak a companyje nem fog átállni erre a comapanyre. Ezért kell ide
+	// az addEmployee metódus
+	@OneToMany(mappedBy = "company")
 	List<Employee> employees = new ArrayList<>();
-	
+
 	@ManyToOne
 	private CompanyType companyType;
-	
+
 //	@NamedEntityGraph(
 //			name = "movieWithActorsAndAwards", 
 //			attributeNodes = {
@@ -52,7 +57,7 @@ public class Company {
 //			}
 //	)
 	public Company() {
-		
+
 	}
 
 	public Company(Long id, int registrationNumber, String name, String adress, List<Employee> employees) {
@@ -118,15 +123,15 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-	//Így két irányból rendbe raktuk a kapcsolatot
+
+	// Így két irányból rendbe raktuk a kapcsolatot
 	public void addEmployee(Employee employee) {
 		if (this.employees == null) {
 			this.employees = new ArrayList<>();
-		} 
-			this.employees.add(employee);
-			employee.setCompany(this);
-		
-		
+		}
+		this.employees.add(employee);
+		employee.setCompany(this);
+
 	}
 
 }

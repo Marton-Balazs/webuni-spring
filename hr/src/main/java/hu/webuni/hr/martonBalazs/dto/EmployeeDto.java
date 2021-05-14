@@ -3,14 +3,9 @@ package hu.webuni.hr.martonBalazs.dto;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-
-import hu.webuni.hr.martonBalazs.model.Vacation;
 
 public class EmployeeDto {
 	
@@ -24,9 +19,6 @@ public class EmployeeDto {
 	private int salary;
 	@Past(message = "Entry date can not be in the future")
 	private LocalDateTime startDate;
-	
-	@OneToMany(mappedBy = "vacation")
-	private ArrayList<Vacation> vactaions = new ArrayList<>();
 	
 	public EmployeeDto() {
 		
