@@ -9,14 +9,14 @@ public class VacationDto {
 	private long id;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
-	private Employee employee;
+	private EmployeeDto employee;
 	private LocalDateTime createdOn;
 	private Boolean accepted;
 	
 	public VacationDto() {
 	}
 
-	public VacationDto(LocalDateTime startDate, LocalDateTime endDate, Employee employee, LocalDateTime createdOn) {
+	public VacationDto(LocalDateTime startDate, LocalDateTime endDate, EmployeeDto employee, LocalDateTime createdOn) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.employee = employee;
@@ -47,11 +47,11 @@ public class VacationDto {
 		this.endDate = endDate;
 	}
 
-	public Employee getEmployee() {
+	public EmployeeDto getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(Employee employee) {
+	public void setEmployee(EmployeeDto employee) {
 		this.employee = employee;
 	}
 
