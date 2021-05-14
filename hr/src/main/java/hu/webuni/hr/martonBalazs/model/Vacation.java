@@ -1,5 +1,6 @@
 package hu.webuni.hr.martonBalazs.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -13,8 +14,8 @@ public class Vacation {
 	@Id
 	@GeneratedValue
 	private long id;
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	@ManyToOne
 	private Employee employee;
 	private LocalDateTime createdOn;
@@ -23,7 +24,7 @@ public class Vacation {
 	public Vacation() {
 	}
 
-	public Vacation(LocalDateTime startDate, LocalDateTime endDate, Employee employee, LocalDateTime createdOn) {
+	public Vacation(LocalDate startDate, LocalDate endDate, Employee employee, LocalDateTime createdOn) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.employee = employee;
@@ -38,19 +39,19 @@ public class Vacation {
 		this.id = id;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
