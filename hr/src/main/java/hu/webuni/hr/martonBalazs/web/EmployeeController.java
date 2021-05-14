@@ -1,14 +1,8 @@
 package hu.webuni.hr.martonBalazs.web;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Map.Entry;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,11 +24,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import hu.webuni.hr.martonBalazs.Repository.EmployeeRepository;
 import hu.webuni.hr.martonBalazs.dto.EmployeeDto;
+import hu.webuni.hr.martonBalazs.dto.VacationDto;
 import hu.webuni.hr.martonBalazs.mapper.EmployeeMapper;
+import hu.webuni.hr.martonBalazs.mapper.VacationMapper;
 import hu.webuni.hr.martonBalazs.model.Employee;
-import hu.webuni.hr.martonBalazs.service.AbstractEmployeeService;
 import hu.webuni.hr.martonBalazs.service.EmployeeService;
-import hu.webuni.hr.martonBalazs.service.NonUniqueIDException;
+import hu.webuni.hr.martonBalazs.service.VacationService;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -49,6 +43,12 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	VacationService vacationService;
+	
+	@Autowired
+	VacationMapper vacationMapper;
 	
 	
 //	@GetMapping
@@ -97,7 +97,6 @@ public class EmployeeController {
 		} catch (NoSuchElementException e){
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
 	}
 
 	@DeleteMapping("/{id}")
@@ -124,4 +123,8 @@ public class EmployeeController {
 	}
 	
 
+	@PostMapping("/{id}/vacations")
+	public VacationDto createVacationForEmployee(@PathVariable long id, @RequestBody @Valid VacationDto vacationDto) {
+		return vacationMapper.vacationToDto(vacationService.createForEmpoyee(id, vacationMapper.dtoToVacation(vacationDto)));
+	}
 }

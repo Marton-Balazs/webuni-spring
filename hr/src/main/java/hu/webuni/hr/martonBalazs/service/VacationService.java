@@ -1,5 +1,6 @@
 package hu.webuni.hr.martonBalazs.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import hu.webuni.hr.martonBalazs.Repository.EmployeeRepository;
 import hu.webuni.hr.martonBalazs.Repository.VacationRepository;
 import hu.webuni.hr.martonBalazs.dto.VacationDto;
+import hu.webuni.hr.martonBalazs.model.Employee;
 import hu.webuni.hr.martonBalazs.model.Vacation;
 
 @Service
@@ -17,6 +20,9 @@ public class VacationService {
 	
 	@Autowired
 	VacationRepository vacationRepository;
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
 	
 	@Transactional
 	public Vacation save(Vacation vacation) {
@@ -66,5 +72,13 @@ public class VacationService {
 			vacation.setStartDate(vacationDto.getStartDate());
 			vacation.setEndDate(vacationDto.getEndDate());
 		}
+	}
+
+	@Transactional
+	public Vacation createForEmpoyee(long employeeId, Vacation vacation) {
+		Employee employee = employeeRepository.findById(employeeId).get();
+		vacation.setEmployee(employee);
+		vacation.setCreatedOn(LocalDateTime.now());
+		return vacationRepository.save(vacation);
 	}
 }
