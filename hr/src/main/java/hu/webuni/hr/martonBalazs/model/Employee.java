@@ -1,8 +1,11 @@
 package hu.webuni.hr.martonBalazs.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -26,6 +29,12 @@ public class Employee {
 	@Past(message = "Entry date can not be in the future")
 	private LocalDateTime startDate;
 	
+	private String username;
+	private String password;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> roles;
+	
 	//1 céghez több employee tartozhat.
 	@ManyToOne
 	private Company company;
@@ -37,13 +46,41 @@ public class Employee {
 	private Employee supervisor;
 	
 	public Employee() {
+		
 	}
 
-	public Employee(Long id, String name, int salary, LocalDateTime startDate, Employee supervisor) {
+	public Employee(Long id, String name, int salary, LocalDateTime startDate, Employee supervisor, String username, String password, Set<String> roles) {
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
 		this.startDate = startDate;
+		this.supervisor = supervisor;
+		this.username = username;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Employee getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Employee supervisor) {
 		this.supervisor = supervisor;
 	}
 
@@ -93,6 +130,14 @@ public class Employee {
 
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+	
+	public Set<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<String> roles) {
+		this.roles = roles;
 	}
 	
 	

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -16,7 +17,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import hu.webuni.hr.martonBalazs.web.View;
 
 //Ha valamit még be kell tölteni, akkor itt kell felvenni plusz atributomként
-@NamedEntityGraph(name = "Company.full", attributeNodes = @NamedAttributeNode("employees"))
+@NamedEntityGraph(name = "Company.full", 
+attributeNodes = @NamedAttributeNode(value = "employees", subgraph = "employeePosition"), 
+subgraphs = {
+	@NamedSubgraph(name = "employeePosition", attributeNodes = { @NamedAttributeNode("position") }) })
 @Entity
 public class Company {
 	
@@ -34,7 +38,7 @@ public class Company {
 	
 	
 	//ha ennek a companynak a listájába berakok egy employeet, akkor magától ennek az employeenak a companyje nem fog átállni erre a comapanyre. Ezért kell ide az addEmployee metódus
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy = "company")
 	List<Employee> employees = new ArrayList<>();
 	
 	@ManyToOne
@@ -122,11 +126,9 @@ public class Company {
 	public void addEmployee(Employee employee) {
 		if (this.employees == null) {
 			this.employees = new ArrayList<>();
-		} 
-			this.employees.add(employee);
-			employee.setCompany(this);
-		
-		
+		}
+		this.employees.add(employee);
+		employee.setCompany(this);
 	}
 
 }

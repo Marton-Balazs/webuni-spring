@@ -1,5 +1,6 @@
 package hu.webuni.hr.martonBalazs.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import hu.webuni.hr.martonBalazs.model.Employee;
@@ -7,16 +8,18 @@ import hu.webuni.hr.martonBalazs.model.Employee;
 public class VacationDto {
 	
 	private long id;
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
-	private Employee employee;
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private EmployeeDto employee;
 	private LocalDateTime createdOn;
 	private Boolean accepted;
 	
 	public VacationDto() {
+		
 	}
 
-	public VacationDto(LocalDateTime startDate, LocalDateTime endDate, Employee employee, LocalDateTime createdOn) {
+	public VacationDto(long id, LocalDate startDate, LocalDate endDate, EmployeeDto employee, LocalDateTime createdOn) {
+		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.employee = employee;
@@ -31,27 +34,27 @@ public class VacationDto {
 		this.id = id;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	public Employee getEmployee() {
+	public EmployeeDto getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(Employee employee) {
+	public void setEmployee(EmployeeDto employee) {
 		this.employee = employee;
 	}
 
@@ -62,14 +65,13 @@ public class VacationDto {
 	public void setCreatedOn(LocalDateTime createdOn) {
 		this.createdOn = createdOn;
 	}
-	
-	public Boolean isAccepted() {
+
+	public Boolean getAccepted() {
 		return accepted;
 	}
 
 	public void setAccepted(Boolean accepted) {
 		this.accepted = accepted;
 	}
-	
 
 }

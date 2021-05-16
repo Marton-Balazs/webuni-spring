@@ -25,8 +25,6 @@ public class EmployeeDto {
 	@Past(message = "Entry date can not be in the future")
 	private LocalDateTime startDate;
 	
-	@OneToMany(mappedBy = "vacation")
-	private ArrayList<Vacation> vactaions = new ArrayList<>();
 	
 	public EmployeeDto() {
 		
